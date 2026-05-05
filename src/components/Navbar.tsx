@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Sparkles, Bell, User, Menu } from "lucide-react";
+import { Bell, User, Menu } from "lucide-react";
 import Button from "./Button";
 import { cn } from "../utils/cn";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -20,8 +21,8 @@ const Navbar = () => {
       "bg-background/80 backdrop-blur-lg border-b border-white/5"
     )}>
       <div className="flex items-center gap-2">
-        <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-accent">
-          <Sparkles className="text-white w-6 h-6" />
+        <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center overflow-hidden">
+          <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
         </div>
         <span className="text-2xl font-bold text-white tracking-tighter">
           Astro<span className="text-accent">Bless</span>

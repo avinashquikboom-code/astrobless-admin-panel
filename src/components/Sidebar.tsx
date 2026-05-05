@@ -6,17 +6,24 @@ import {
   CreditCard, 
   BarChart2, 
   Settings,
-  LogOut
+  LogOut,
+  Moon,
+  Sparkles,
+  Calendar
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
+import logo from "../assets/logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-    { icon: Users, label: "Users", path: "/users" },
+    { icon: Moon, label: "Kundli Chart", path: "/kundli" },
+    { icon: Sparkles, label: "AI Assistant", path: "/chat" },
+    { icon: Calendar, label: "Life Timeline", path: "/timeline" },
+    { icon: Users, label: "Users Management", path: "/users" },
     { icon: UserCheck, label: "Astrologers", path: "/astrologers" },
     { icon: CreditCard, label: "Payments", path: "/payments" },
     { icon: BarChart2, label: "Reports", path: "/reports" },
@@ -26,9 +33,9 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-surface border-r border-white/5 flex flex-col h-screen sticky top-0 hidden lg:flex">
       <div className="p-8">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
-            <span className="text-white font-black">A</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform overflow-hidden border border-white/10">
+            <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
           </div>
           <span className="text-xl font-bold text-white tracking-tight">AstroBless <span className="text-accent">Admin</span></span>
         </Link>
