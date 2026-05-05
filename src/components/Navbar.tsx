@@ -24,9 +24,6 @@ const Navbar = () => {
         <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center overflow-hidden">
           <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
         </div>
-        <span className="text-2xl font-bold text-white tracking-tighter">
-          Astro<span className="text-accent">Bless</span>
-        </span>
       </div>
 
       <div className="hidden md:flex items-center gap-8">
