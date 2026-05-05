@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
 
 const MainLayout = ({ onLogout }: { onLogout: () => void }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -26,7 +28,7 @@ const MainLayout = ({ onLogout }: { onLogout: () => void }) => {
       <div className="flex pt-20 flex-1 relative">
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
-          <Sidebar onLogout={onLogout} />
+          <Sidebar onLogout={() => setIsLogoutModalOpen(true)} />
         </div>
 
         {/* Mobile Sidebar Drawer */}
@@ -51,7 +53,7 @@ const MainLayout = ({ onLogout }: { onLogout: () => void }) => {
                 className="fixed inset-y-0 left-0 w-72 bg-surface z-[56] lg:hidden shadow-2xl border-r border-white/5"
               >
                 <div className="h-full overflow-y-auto" onClick={() => setIsSidebarOpen(false)}>
-                  <Sidebar onLogout={onLogout} />
+                  <Sidebar onLogout={() => setIsLogoutModalOpen(true)} />
                 </div>
               </motion.div>
             </>
@@ -62,6 +64,37 @@ const MainLayout = ({ onLogout }: { onLogout: () => void }) => {
           <Outlet />
         </main>
       </div>
+
+      <Modal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        title="Confirm Logout"
+      >
+        <div className="text-center space-y-6 py-4">
+          <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto">
+            <LogOut className="w-10 h-10 text-red-500" />
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-xl font-bold text-white">Are you sure?</h4>
+            <p className="text-white/40">You will need to login again to access the admin portal.</p>
+          </div>
+          <div className="flex gap-4 pt-4">
+            <Button 
+              variant="secondary" 
+              className="flex-1 h-12"
+              onClick={() => setIsLogoutModalOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button 
+              className="flex-1 h-12 bg-red-500 hover:bg-red-600 shadow-red-500/20"
+              onClick={onLogout}
+            >
+              Logout Now
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
