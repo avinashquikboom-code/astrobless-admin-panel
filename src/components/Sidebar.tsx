@@ -14,7 +14,6 @@ import {
 import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
 import logo from "../assets/logo.png";
-import { useState } from "react";
 
 const Sidebar = ({ onLogout }: { onLogout: () => void }) => {
   const location = useLocation();

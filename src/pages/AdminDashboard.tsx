@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { 
   Users, 
   UserCheck, 
-  CreditCard, 
   TrendingUp, 
   ArrowUpRight, 
   ArrowDownRight,
@@ -10,7 +9,6 @@ import {
   Activity,
   Zap,
   Star,
-  ShieldCheck,
   Bell
 } from "lucide-react";
 import { 
