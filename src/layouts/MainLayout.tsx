@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../components/Button";
 
-const MainLayout = () => {
+const MainLayout = ({ onLogout }: { onLogout: () => void }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ const MainLayout = () => {
       <div className="flex pt-20 flex-1 relative">
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
-          <Sidebar />
+          <Sidebar onLogout={onLogout} />
         </div>
 
         {/* Mobile Sidebar Drawer */}
@@ -51,7 +51,7 @@ const MainLayout = () => {
                 className="fixed inset-y-0 left-0 w-72 bg-surface z-[56] lg:hidden shadow-2xl border-r border-white/5"
               >
                 <div className="h-full overflow-y-auto" onClick={() => setIsSidebarOpen(false)}>
-                  <Sidebar />
+                  <Sidebar onLogout={onLogout} />
                 </div>
               </motion.div>
             </>

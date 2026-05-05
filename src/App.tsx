@@ -28,6 +28,7 @@ const AnimatedRoutes = () => {
   }, []);
 
   const handleLogin = () => setIsAuthenticated(true);
+  const handleLogout = () => setIsAuthenticated(false);
 
   return (
     <AnimatePresence mode="wait">
@@ -57,7 +58,7 @@ const AnimatedRoutes = () => {
         >
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<LandingPage />} />
-            <Route element={<MainLayout />}>
+            <Route element={<MainLayout onLogout={handleLogout} />}>
               <Route path="/dashboard" element={<AdminDashboard />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/astrologers" element={<AstrologersManagementPage />} />
