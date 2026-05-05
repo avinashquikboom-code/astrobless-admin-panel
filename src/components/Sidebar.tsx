@@ -31,7 +31,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-surface border-r border-white/5 flex flex-col h-screen sticky top-0 hidden lg:flex">
+    <aside className="w-full lg:w-64 bg-surface border-r border-white/5 flex flex-col h-full sticky top-0">
       <div className="p-8">
         <Link to="/" className="flex items-center justify-center group">
           <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform overflow-hidden border border-white/10 shadow-premium">

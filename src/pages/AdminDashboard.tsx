@@ -6,7 +6,7 @@ import {
   TrendingUp, 
   ArrowUpRight, 
   ArrowDownRight,
-  DollarSign,
+  IndianRupee, 
   Activity,
   Zap,
   Star,
@@ -40,7 +40,7 @@ const data = [
 const activities = [
   { id: 1, user: "John Doe", action: "New subscription", time: "2 mins ago", icon: <Zap className="w-4 h-4 text-accent" /> },
   { id: 2, user: "Sarah Smith", action: "Applied as Astrologer", time: "15 mins ago", icon: <UserCheck className="w-4 h-4 text-blue-500" /> },
-  { id: 3, user: "Alex Wong", action: "Payment of $120 successful", time: "1 hour ago", icon: <DollarSign className="w-4 h-4 text-green-500" /> },
+  { id: 3, user: "Alex Wong", action: "Payment of ₹120 successful", time: "1 hour ago", icon: <IndianRupee className="w-4 h-4 text-green-500" /> },
   { id: 4, user: "Elena Gilbert", action: "Premium chat started", time: "3 hours ago", icon: <Star className="w-4 h-4 text-purple-500" /> },
 ];
 
@@ -51,84 +51,74 @@ const AdminDashboard = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="space-y-8 pb-12"
+      className="space-y-10 pb-12"
     >
-      {/* Welcome Section */}
-      <section className="relative overflow-hidden rounded-3xl p-8 border border-white/5 bg-gradient-to-br from-surface to-surface/40">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] -mr-32 -mt-32 rounded-full" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <motion.h1 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-3xl font-bold text-white mb-2"
-            >
-              Welcome back, Admin 👋
-            </motion.h1>
-            <p className="text-white/40 max-w-md">
-              Here's what's happening on <span className="text-accent font-bold">AstroBless</span> today. Platform usage is up by <span className="text-green-500 font-bold">12%</span>.
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Button variant="secondary" className="gap-2">
-              <Zap className="w-4 h-4" /> View Live Analytics
-            </Button>
-            <Button className="gap-2 shadow-accent">
-              <Bell className="w-4 h-4" /> Manage Notifications
-            </Button>
-          </div>
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-end justify-start gap-10 px-2">
+        <div>
+          <h1 className="text-4xl font-black text-white tracking-tight mb-2">
+            Dashboard
+          </h1>
+          <p className="text-white/40 font-medium">
+            Overview of <span className="text-accent">AstroBless</span> performance and metrics.
+          </p>
         </div>
-      </section>
+        <div className="flex gap-3 mb-1">
+          <Button variant="secondary" size="sm" className="gap-2 bg-white/5 border-white/5 px-4">
+            <Zap className="w-4 h-4" /> Analytics
+          </Button>
+          <Button size="sm" className="gap-2 px-4">
+            <Bell className="w-4 h-4" /> Updates
+          </Button>
+        </div>
+      </div>
 
-      {/* Main Stats Grid */}
+      {/* Stats Section */}
       <motion.div 
         variants={staggerContainer}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        <StatCard title="Total Users" value="12,543" change={12.5} icon={<Users />} color="text-accent" />
-        <StatCard title="Active Experts" value="452" change={8.2} icon={<ShieldCheck />} color="text-blue-500" />
-        <StatCard title="Net Revenue" value="$45,230" change={23.1} icon={<DollarSign />} color="text-green-500" />
-        <StatCard title="Platform Health" value="99.8%" change={0.1} icon={<Activity />} color="text-purple-500" />
+        <StatCard title="Total Revenue" value="₹45,230" change={23.1} icon={<IndianRupee />} color="bg-green-500/10 text-green-500" />
+        <StatCard title="Total Users" value="12,543" change={12.5} icon={<Users />} color="bg-accent/10 text-accent" />
+        <StatCard title="Active Experts" value="452" change={8.2} icon={<UserCheck />} color="bg-blue-500/10 text-blue-500" />
+        <StatCard title="Platform Health" value="99.8%" change={0.1} icon={<Activity />} color="bg-purple-500/10 text-purple-500" />
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Analytics Section */}
-        <div className="lg:col-span-2 space-y-8">
-          <Card className="p-8">
-            <div className="flex items-center justify-between mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Main Chart Section */}
+        <div className="lg:col-span-8 space-y-8">
+          <Card className="p-8 border-white/5 bg-surface/30">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
               <div>
-                <h3 className="text-xl font-bold text-white">Weekly Performance</h3>
-                <p className="text-xs text-white/40">Revenue vs Engagement trends</p>
+                <h3 className="text-xl font-bold text-white">Revenue Growth</h3>
+                <p className="text-sm text-white/30">Weekly financial overview</p>
               </div>
-              <div className="flex gap-2">
-                <Button variant="secondary" size="sm">Export</Button>
-                <select className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-white outline-none">
-                  <option>Last 7 Days</option>
-                  <option>Last 30 Days</option>
-                </select>
+              <div className="flex items-center gap-2 bg-white/5 p-1 rounded-xl border border-white/5">
+                <button className="px-4 py-1.5 text-xs font-bold bg-accent text-white rounded-lg shadow-lg">Week</button>
+                <button className="px-4 py-1.5 text-xs font-bold text-white/40 hover:text-white transition-colors">Month</button>
               </div>
             </div>
-            <div className="h-[300px] w-full">
+            <div className="h-[340px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data}>
                   <defs>
                     <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#FD7D00" stopOpacity={0.3}/>
+                      <stop offset="5%" stopColor="#FD7D00" stopOpacity={0.2}/>
                       <stop offset="95%" stopColor="#FD7D00" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff05" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dy={10} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dx={-10} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff03" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#ffffff20', fontSize: 11, fontWeight: 600 }} dy={15} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#ffffff20', fontSize: 11, fontWeight: 600 }} dx={-15} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1F2E0A', border: '1px solid #ffffff10', borderRadius: '12px' }}
+                    contentStyle={{ backgroundColor: '#192309', border: '1px solid #ffffff05', borderRadius: '16px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
                     itemStyle={{ color: '#fff' }}
                   />
                   <Area 
                     type="monotone" 
                     dataKey="revenue" 
                     stroke="#FD7D00" 
-                    strokeWidth={4} 
+                    strokeWidth={3} 
                     fillOpacity={1} 
                     fill="url(#colorRev)" 
                   />
@@ -137,53 +127,66 @@ const AdminDashboard = () => {
             </div>
           </Card>
 
-          {/* Quick Actions */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <QuickAction icon={<Users className="w-5 h-5" />} label="New User" color="bg-blue-500" />
-            <QuickAction icon={<UserCheck className="w-5 h-5" />} label="Verify Expert" color="bg-accent" />
-            <QuickAction icon={<CreditCard className="w-5 h-5" />} label="Payouts" color="bg-green-500" />
-            <QuickAction icon={<TrendingUp className="w-5 h-5" />} label="Reports" color="bg-purple-500" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Card className="p-6 border-white/5 bg-surface/20">
+              <h4 className="text-sm font-bold text-white/40 uppercase tracking-widest mb-6">Quick Actions</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <QuickAction icon={<Users />} label="Users" color="bg-blue-500" />
+                <QuickAction icon={<UserCheck />} label="Experts" color="bg-accent" />
+                <QuickAction icon={<IndianRupee />} label="Payouts" color="bg-green-500" />
+                <QuickAction icon={<TrendingUp />} label="Logs" color="bg-purple-500" />
+              </div>
+            </Card>
+            <Card className="p-6 border-white/5 bg-accent/5">
+              <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-bold text-accent uppercase tracking-widest">Platform Status</h4>
+                <div className="flex items-center gap-1.5 px-2 py-1 bg-green-500/10 rounded-full border border-green-500/20">
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-[10px] font-black text-green-500 uppercase">Live</span>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <SegmentItem label="Direct" percentage={65} color="bg-accent" />
+                <SegmentItem label="Referral" percentage={35} color="bg-white/10" />
+              </div>
+              <p className="mt-6 text-[11px] text-white/30 leading-relaxed italic">
+                "Infrastructure is running optimally with zero reported incidents in last 24h."
+              </p>
+            </Card>
           </div>
         </div>
 
-        {/* Sidebar Analytics */}
-        <div className="space-y-8">
-          {/* Live Feed */}
-          <Card className="p-6">
-            <h3 className="text-lg font-bold text-white mb-6">Live Activity</h3>
-            <div className="space-y-6">
+        {/* Activity Sidebar */}
+        <div className="lg:col-span-4">
+          <Card className="p-0 border-white/5 bg-surface/30 h-full flex flex-col overflow-hidden">
+            <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+              <h3 className="text-lg font-bold text-white">Live Feed</h3>
+              <p className="text-xs text-white/30 font-medium">Real-time platform events</p>
+            </div>
+            <div className="flex-1 p-6 space-y-8">
               {activities.map((act) => (
                 <motion.div 
                   key={act.id}
                   variants={fadeIn}
-                  className="flex gap-4 items-start"
+                  className="flex gap-4 group"
                 >
-                  <div className="p-2 bg-white/5 rounded-lg border border-white/5">
+                  <div className="shrink-0 w-10 h-10 bg-white/5 rounded-xl border border-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
                     {act.icon}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-sm font-bold text-white">{act.user}</h4>
-                      <span className="text-[10px] text-white/30 uppercase">{act.time}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-baseline mb-0.5">
+                      <h4 className="text-sm font-bold text-white truncate">{act.user}</h4>
+                      <span className="text-[10px] text-white/20 font-black uppercase whitespace-nowrap ml-2">{act.time}</span>
                     </div>
-                    <p className="text-xs text-white/50">{act.action}</p>
+                    <p className="text-xs text-white/40 truncate">{act.action}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
-            <Button variant="ghost" size="sm" className="w-full mt-6 text-accent">View All Logs</Button>
-          </Card>
-
-          {/* Segment Chart */}
-          <Card className="p-6 bg-accent/5 border-accent/10">
-            <h3 className="text-lg font-bold text-white mb-6">User Segments</h3>
-            <div className="space-y-4">
-              <SegmentItem label="Direct" percentage={65} color="bg-accent" />
-              <SegmentItem label="Social" percentage={20} color="bg-blue-500" />
-              <SegmentItem label="Referral" percentage={15} color="bg-purple-500" />
-            </div>
-            <div className="mt-8 p-3 bg-white/5 rounded-xl border border-white/5 text-[10px] text-white/40">
-              Insight: Social traffic increased by <span className="text-white font-bold">5%</span> after the new campaign.
+            <div className="p-6 bg-white/[0.02] border-t border-white/5">
+              <Button variant="ghost" size="sm" className="w-full text-white/40 hover:text-white transition-colors group">
+                Full Activity Logs <ArrowUpRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Button>
             </div>
           </Card>
         </div>
@@ -194,33 +197,35 @@ const AdminDashboard = () => {
 
 const StatCard = ({ title, value, change, icon, color }: any) => (
   <motion.div variants={slideUp}>
-    <Card className="relative overflow-hidden group p-6 h-full">
-      <div className="flex items-start justify-between mb-4">
-        <div className={cn("p-3 bg-white/5 rounded-xl group-hover:bg-accent/10 transition-colors duration-500", color)}>
+    <Card className="relative overflow-hidden group p-6 border-white/5 bg-surface/20">
+      <div className="flex items-center justify-between mb-6">
+        <div className={cn("p-2.5 rounded-xl transition-colors duration-500", color)}>
           {icon}
         </div>
-        <div className={cn("flex items-center gap-1 text-xs font-black", change >= 0 ? "text-green-500" : "text-red-500")}>
+        <div className={cn("flex items-center gap-0.5 text-[11px] font-black px-1.5 py-0.5 rounded-md", change >= 0 ? "text-green-500 bg-green-500/5" : "text-red-500 bg-red-500/5")}>
           {change >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
           {Math.abs(change)}%
         </div>
       </div>
-      <p className="text-white/40 text-[10px] uppercase font-black tracking-[0.2em] mb-1">{title}</p>
-      <div className="text-2xl font-black text-white">{value}</div>
-      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-white/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-all duration-700" />
+      <div>
+        <h4 className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">{title}</h4>
+        <div className="text-3xl font-black text-white">{value}</div>
+      </div>
+      <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-white/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
     </Card>
   </motion.div>
 );
 
 const QuickAction = ({ icon, label, color }: any) => (
   <motion.button
-    whileHover={{ y: -5 }}
-    whileTap={{ scale: 0.95 }}
-    className="flex flex-col items-center justify-center p-4 bg-surface border border-white/5 rounded-2xl gap-3 hover:border-accent/20 transition-all group"
+    whileHover={{ scale: 1.02, y: -2 }}
+    whileTap={{ scale: 0.98 }}
+    className="flex flex-col items-center justify-center p-4 bg-white/5 border border-white/5 rounded-2xl gap-3 hover:border-accent/30 hover:bg-accent/[0.02] transition-all group"
   >
-    <div className={cn("p-3 rounded-xl text-white shadow-lg", color)}>
+    <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center text-white/60 group-hover:text-white transition-colors", color.replace('bg-', 'text-'))}>
       {icon}
     </div>
-    <span className="text-xs font-bold text-white/60 group-hover:text-white transition-colors">{label}</span>
+    <span className="text-[11px] font-black text-white/40 uppercase tracking-wider group-hover:text-white transition-colors">{label}</span>
   </motion.button>
 );
 

@@ -48,16 +48,16 @@ const AdminReportsPage = () => {
       exit="exit"
       className="space-y-8"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-start gap-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">System Reports</h1>
-          <p className="text-white/60">Analyze platform growth and deep user behavior insights.</p>
+          <h1 className="text-4xl font-black text-white tracking-tight">System Reports</h1>
+          <p className="text-white/40 font-medium mt-1">Analyze platform growth and deep user behavior insights.</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" className="gap-2">
+          <Button variant="secondary" size="sm" className="gap-2 bg-white/5 border-white/5 px-4 h-10">
             <Share2 className="w-4 h-4" /> Share
           </Button>
-          <Button className="gap-2">
+          <Button size="sm" className="gap-2 px-4 h-10">
             <Download className="w-4 h-4" /> Export PDF
           </Button>
         </div>

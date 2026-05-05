@@ -34,12 +34,12 @@ const UsersPage = () => {
       exit="exit"
       className="space-y-8"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-start gap-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Users Management</h1>
-          <p className="text-white/60">Oversee and manage platform users and their activities.</p>
+          <h1 className="text-4xl font-black text-white tracking-tight">Users Management</h1>
+          <p className="text-white/40 font-medium mt-1">Oversee and manage platform users and their activities.</p>
         </div>
-        <Button className="gap-2">
+        <Button size="sm" className="gap-2 px-4 h-10">
           <UserPlus className="w-4 h-4" /> Add User
         </Button>
       </div>

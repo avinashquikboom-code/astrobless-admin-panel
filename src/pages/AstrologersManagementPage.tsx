@@ -32,14 +32,14 @@ const AstrologersManagementPage = () => {
       exit="exit"
       className="space-y-8"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-start gap-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Astrologer Approvals</h1>
-          <p className="text-white/60">Review and manage professional astrologer applications.</p>
+          <h1 className="text-4xl font-black text-white tracking-tight">Astrologer Approvals</h1>
+          <p className="text-white/40 font-medium mt-1">Review and manage professional astrologer applications.</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary">Export List</Button>
-          <Button variant="primary">Platform Stats</Button>
+          <Button variant="secondary" size="sm" className="bg-white/5 border-white/5 px-4">Export List</Button>
+          <Button variant="primary" size="sm" className="px-4">Platform Stats</Button>
         </div>
       </div>
 
