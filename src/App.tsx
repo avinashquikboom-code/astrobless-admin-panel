@@ -7,6 +7,7 @@ import ChatPage from "./pages/ChatPage";
 import TimelinePage from "./pages/TimelinePage";
 import AstrologersPage from "./pages/AstrologersPage";
 import ProfilePage from "./pages/ProfilePage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/astrologers" element={<AstrologersPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </Router>

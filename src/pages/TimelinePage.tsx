@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Briefcase, Heart, Coins, Home, ChevronRight } from "lucide-react";
 import Card from "../components/Card";
@@ -107,9 +108,11 @@ const TimelineItem = ({ event, isEven }: any) => {
             "mt-4 flex",
             isEven ? "justify-start" : "md:justify-end"
           )}>
-            <button className="text-xs font-bold text-white/40 hover:text-white flex items-center gap-1 transition-colors">
-              View Planetary Data <ChevronRight className="w-3 h-3" />
-            </button>
+            <Link to="/kundli">
+              <button className="text-xs font-bold text-white/40 hover:text-white flex items-center gap-1 transition-colors">
+                View Planetary Data <ChevronRight className="w-3 h-3" />
+              </button>
+            </Link>
           </div>
         </Card>
       </div>

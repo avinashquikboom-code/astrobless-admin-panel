@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { 
   Heart, 
   Briefcase, 
@@ -63,9 +64,11 @@ const DashboardPage = () => {
           <p className="text-white/60 text-sm leading-relaxed mb-4">
             A great day for financial decisions. Venus enters your 2nd house, bringing unexpected gains.
           </p>
-          <Button variant="ghost" size="sm" className="text-accent p-0 hover:bg-transparent">
-            Read Full Report <ChevronRight className="w-4 h-4 ml-1" />
-          </Button>
+          <Link to="/timeline">
+            <Button variant="ghost" size="sm" className="text-accent p-0 hover:bg-transparent">
+              Read Full Report <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </Link>
         </Card>
 
         <Card>
@@ -78,9 +81,14 @@ const DashboardPage = () => {
           <p className="text-white/60 text-sm mb-4">
             Next Major Event: <span className="text-white font-semibold">Career Peak (Oct 2026)</span>
           </p>
-          <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden mb-4">
             <div className="bg-accent h-full w-[65%]" />
           </div>
+          <Link to="/timeline">
+            <Button variant="ghost" size="sm" className="w-full text-white/40 hover:text-white">
+              Explore Timeline
+            </Button>
+          </Link>
         </Card>
 
         <Card>
@@ -94,9 +102,11 @@ const DashboardPage = () => {
           <p className="text-white/60 text-sm mb-4">
             With <span className="text-white font-semibold">Aries</span>. High emotional bond predicted.
           </p>
-          <Button variant="secondary" size="sm" className="w-full">
-            Check Another
-          </Button>
+          <Link to="/kundli">
+            <Button variant="secondary" size="sm" className="w-full">
+              Check Another
+            </Button>
+          </Link>
         </Card>
       </div>
 
