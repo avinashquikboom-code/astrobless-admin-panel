@@ -6,7 +6,12 @@ import {
   TrendingUp, 
   ArrowUpRight, 
   ArrowDownRight,
-  DollarSign
+  DollarSign,
+  Activity,
+  Zap,
+  Star,
+  ShieldCheck,
+  Bell
 } from "lucide-react";
 import { 
   AreaChart, 
@@ -18,17 +23,25 @@ import {
   ResponsiveContainer 
 } from "recharts";
 import Card from "../components/Card";
+import Button from "../components/Button";
 import { cn } from "../utils/cn";
-import { pageTransition, staggerContainer } from "../animations/variants";
+import { pageTransition, staggerContainer, fadeIn, slideUp } from "../animations/variants";
 
 const data = [
-  { name: "Jan", revenue: 4000, users: 2400 },
-  { name: "Feb", revenue: 3000, users: 1398 },
-  { name: "Mar", revenue: 2000, users: 9800 },
-  { name: "Apr", revenue: 2780, users: 3908 },
-  { name: "May", revenue: 1890, users: 4800 },
-  { name: "Jun", revenue: 2390, users: 3800 },
-  { name: "Jul", revenue: 3490, users: 4300 },
+  { name: "Mon", revenue: 4000 },
+  { name: "Tue", revenue: 3000 },
+  { name: "Wed", revenue: 5000 },
+  { name: "Thu", revenue: 2780 },
+  { name: "Fri", revenue: 1890 },
+  { name: "Sat", revenue: 2390 },
+  { name: "Sun", revenue: 3490 },
+];
+
+const activities = [
+  { id: 1, user: "John Doe", action: "New subscription", time: "2 mins ago", icon: <Zap className="w-4 h-4 text-accent" /> },
+  { id: 2, user: "Sarah Smith", action: "Applied as Astrologer", time: "15 mins ago", icon: <UserCheck className="w-4 h-4 text-blue-500" /> },
+  { id: 3, user: "Alex Wong", action: "Payment of $120 successful", time: "1 hour ago", icon: <DollarSign className="w-4 h-4 text-green-500" /> },
+  { id: 4, user: "Elena Gilbert", action: "Premium chat started", time: "3 hours ago", icon: <Star className="w-4 h-4 text-purple-500" /> },
 ];
 
 const AdminDashboard = () => {
@@ -38,134 +51,191 @@ const AdminDashboard = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="space-y-8"
+      className="space-y-8 pb-12"
     >
-      <div>
-        <h1 className="text-3xl font-bold text-white">Dashboard Overview</h1>
-        <p className="text-white/60">Real-time platform performance and user engagement metrics.</p>
-      </div>
+      {/* Welcome Section */}
+      <section className="relative overflow-hidden rounded-3xl p-8 border border-white/5 bg-gradient-to-br from-surface to-surface/40">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] -mr-32 -mt-32 rounded-full" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-3xl font-bold text-white mb-2"
+            >
+              Welcome back, Admin 👋
+            </motion.h1>
+            <p className="text-white/40 max-w-md">
+              Here's what's happening on <span className="text-accent font-bold">AstroBless</span> today. Platform usage is up by <span className="text-green-500 font-bold">12%</span>.
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <Button variant="secondary" className="gap-2">
+              <Zap className="w-4 h-4" /> View Live Analytics
+            </Button>
+            <Button className="gap-2 shadow-accent">
+              <Bell className="w-4 h-4" /> Manage Notifications
+            </Button>
+          </div>
+        </div>
+      </section>
 
+      {/* Main Stats Grid */}
       <motion.div 
         variants={staggerContainer}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        <StatCard 
-          title="Total Users" 
-          value="12,543" 
-          change={12.5} 
-          icon={<Users className="w-6 h-6" />} 
-        />
-        <StatCard 
-          title="Active Astrologers" 
-          value="452" 
-          change={8.2} 
-          icon={<UserCheck className="w-6 h-6" />} 
-        />
-        <StatCard 
-          title="Total Revenue" 
-          value="$45,230" 
-          change={23.1} 
-          icon={<DollarSign className="w-6 h-6" />} 
-        />
-        <StatCard 
-          title="Pending Approvals" 
-          value="24" 
-          change={-5.4} 
-          icon={<CreditCard className="w-6 h-6" />} 
-        />
+        <StatCard title="Total Users" value="12,543" change={12.5} icon={<Users />} color="text-accent" />
+        <StatCard title="Active Experts" value="452" change={8.2} icon={<ShieldCheck />} color="text-blue-500" />
+        <StatCard title="Net Revenue" value="$45,230" change={23.1} icon={<DollarSign />} color="text-green-500" />
+        <StatCard title="Platform Health" value="99.8%" change={0.1} icon={<Activity />} color="text-purple-500" />
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-xl font-bold text-white">Revenue Growth</h3>
-            <select className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-white outline-none">
-              <option>Last 6 Months</option>
-              <option>Last Year</option>
-            </select>
-          </div>
-          <div className="h-[350px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={data}>
-                <defs>
-                  <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#FD7D00" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#FD7D00" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff05" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dx={-10} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#1F2E0A', border: '1px solid #ffffff10', borderRadius: '12px' }}
-                  itemStyle={{ color: '#fff' }}
-                />
-                <Area 
-                  type="monotone" 
-                  dataKey="revenue" 
-                  stroke="#FD7D00" 
-                  strokeWidth={3} 
-                  fillOpacity={1} 
-                  fill="url(#colorRevenue)" 
-                  animationDuration={1500}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </Card>
-
-        <Card>
-          <h3 className="text-xl font-bold text-white mb-8">User Segments</h3>
-          <div className="space-y-6">
-            <SegmentItem label="Direct Search" percentage={45} color="bg-accent" />
-            <SegmentItem label="Referrals" percentage={28} color="bg-blue-500" />
-            <SegmentItem label="Social Media" percentage={15} color="bg-purple-500" />
-            <SegmentItem label="Others" percentage={12} color="bg-white/10" />
-          </div>
-          <div className="mt-12 p-4 bg-accent/10 border border-accent/20 rounded-xl">
-            <div className="flex items-center gap-2 text-accent font-bold mb-1">
-              <TrendingUp className="w-4 h-4" /> Insight
+        {/* Analytics Section */}
+        <div className="lg:col-span-2 space-y-8">
+          <Card className="p-8">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h3 className="text-xl font-bold text-white">Weekly Performance</h3>
+                <p className="text-xs text-white/40">Revenue vs Engagement trends</p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="secondary" size="sm">Export</Button>
+                <select className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-white outline-none">
+                  <option>Last 7 Days</option>
+                  <option>Last 30 Days</option>
+                </select>
+              </div>
             </div>
-            <p className="text-xs text-white/60">
-              User retention has increased by 15% this month due to new AI chat features.
-            </p>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={data}>
+                  <defs>
+                    <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#FD7D00" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#FD7D00" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff05" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#ffffff40', fontSize: 12 }} dx={-10} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1F2E0A', border: '1px solid #ffffff10', borderRadius: '12px' }}
+                    itemStyle={{ color: '#fff' }}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="revenue" 
+                    stroke="#FD7D00" 
+                    strokeWidth={4} 
+                    fillOpacity={1} 
+                    fill="url(#colorRev)" 
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <QuickAction icon={<Users className="w-5 h-5" />} label="New User" color="bg-blue-500" />
+            <QuickAction icon={<UserCheck className="w-5 h-5" />} label="Verify Expert" color="bg-accent" />
+            <QuickAction icon={<CreditCard className="w-5 h-5" />} label="Payouts" color="bg-green-500" />
+            <QuickAction icon={<TrendingUp className="w-5 h-5" />} label="Reports" color="bg-purple-500" />
           </div>
-        </Card>
+        </div>
+
+        {/* Sidebar Analytics */}
+        <div className="space-y-8">
+          {/* Live Feed */}
+          <Card className="p-6">
+            <h3 className="text-lg font-bold text-white mb-6">Live Activity</h3>
+            <div className="space-y-6">
+              {activities.map((act) => (
+                <motion.div 
+                  key={act.id}
+                  variants={fadeIn}
+                  className="flex gap-4 items-start"
+                >
+                  <div className="p-2 bg-white/5 rounded-lg border border-white/5">
+                    {act.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <h4 className="text-sm font-bold text-white">{act.user}</h4>
+                      <span className="text-[10px] text-white/30 uppercase">{act.time}</span>
+                    </div>
+                    <p className="text-xs text-white/50">{act.action}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <Button variant="ghost" size="sm" className="w-full mt-6 text-accent">View All Logs</Button>
+          </Card>
+
+          {/* Segment Chart */}
+          <Card className="p-6 bg-accent/5 border-accent/10">
+            <h3 className="text-lg font-bold text-white mb-6">User Segments</h3>
+            <div className="space-y-4">
+              <SegmentItem label="Direct" percentage={65} color="bg-accent" />
+              <SegmentItem label="Social" percentage={20} color="bg-blue-500" />
+              <SegmentItem label="Referral" percentage={15} color="bg-purple-500" />
+            </div>
+            <div className="mt-8 p-3 bg-white/5 rounded-xl border border-white/5 text-[10px] text-white/40">
+              Insight: Social traffic increased by <span className="text-white font-bold">5%</span> after the new campaign.
+            </div>
+          </Card>
+        </div>
       </div>
     </motion.div>
   );
 };
 
-const StatCard = ({ title, value, change, icon }: any) => (
-  <Card className="relative overflow-hidden group">
-    <div className="flex items-start justify-between mb-4">
-      <div className="p-3 bg-accent/10 text-accent rounded-xl group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-        {icon}
+const StatCard = ({ title, value, change, icon, color }: any) => (
+  <motion.div variants={slideUp}>
+    <Card className="relative overflow-hidden group p-6 h-full">
+      <div className="flex items-start justify-between mb-4">
+        <div className={cn("p-3 bg-white/5 rounded-xl group-hover:bg-accent/10 transition-colors duration-500", color)}>
+          {icon}
+        </div>
+        <div className={cn("flex items-center gap-1 text-xs font-black", change >= 0 ? "text-green-500" : "text-red-500")}>
+          {change >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+          {Math.abs(change)}%
+        </div>
       </div>
-      <div className={`flex items-center gap-1 text-xs font-bold ${change >= 0 ? "text-green-500" : "text-red-500"}`}>
-        {change >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-        {Math.abs(change)}%
-      </div>
+      <p className="text-white/40 text-[10px] uppercase font-black tracking-[0.2em] mb-1">{title}</p>
+      <div className="text-2xl font-black text-white">{value}</div>
+      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-white/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-all duration-700" />
+    </Card>
+  </motion.div>
+);
+
+const QuickAction = ({ icon, label, color }: any) => (
+  <motion.button
+    whileHover={{ y: -5 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex flex-col items-center justify-center p-4 bg-surface border border-white/5 rounded-2xl gap-3 hover:border-accent/20 transition-all group"
+  >
+    <div className={cn("p-3 rounded-xl text-white shadow-lg", color)}>
+      {icon}
     </div>
-    <h4 className="text-white/40 text-xs uppercase font-bold tracking-widest mb-1">{title}</h4>
-    <div className="text-3xl font-bold text-white">{value}</div>
-    {/* Decorative Background Element */}
-    <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-all duration-500" />
-  </Card>
+    <span className="text-xs font-bold text-white/60 group-hover:text-white transition-colors">{label}</span>
+  </motion.button>
 );
 
 const SegmentItem = ({ label, percentage, color }: any) => (
-  <div className="space-y-2">
-    <div className="flex justify-between text-sm">
-      <span className="text-white/60">{label}</span>
-      <span className="text-white font-bold">{percentage}%</span>
+  <div className="space-y-1.5">
+    <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest">
+      <span className="text-white/40">{label}</span>
+      <span className="text-white">{percentage}%</span>
     </div>
-    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
       <motion.div 
         initial={{ width: 0 }}
         whileInView={{ width: `${percentage}%` }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className={cn("h-full", color)}
+        transition={{ duration: 1.5, ease: "circOut" }}
+        className={cn("h-full rounded-full", color)}
       />
     </div>
   </div>
